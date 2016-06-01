@@ -247,7 +247,3 @@ double calcBmi(double weight, double height)
 
 	return (result);
 }
-
-
-
-# PatientRecord
