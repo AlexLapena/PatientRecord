@@ -132,7 +132,7 @@ void insertEnd(struct rec **head, double wNum, double hNum, double bmi,
 void addRecord(struct rec **head, double wNum, double hNum, double bmi, 
 	char * name, int recNum)
 {
-	struct rec * record = (struct rec *) realloc(head, recNum * sizeof(struct rec)); 
+	struct rec * record = (struct rec *) realloc(record, recNum * sizeof(struct rec)); 
 	struct rec *current = *head;
 
 	record->name = (char *) malloc(sizeof(char) * strlen(name));
