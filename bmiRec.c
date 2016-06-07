@@ -14,11 +14,10 @@ struct rec
 };
 
 //Prototypes
-void insertEnd(struct rec **head, double weight, double height, double bmi, 
-	char * name, int recNum);
-void addRecord(struct rec **head, double wNum, double hNum, double bmi, 
-	char * name, int recNum);
+void insertEnd(struct rec **head, double weight, double height, double bmi, char * name, int recNum);
+void addRecord(struct rec **head, double wNum, double hNum, double bmi, char * name, int recNum);
 void removeRecord(struct rec **head, char * name);
+struct rec * sortList(struct rec * head);
 void toFile(struct rec * list);
 void printRecs(struct rec * list);
 void destroy(struct rec ** head);
@@ -48,7 +47,7 @@ int main(int argc, char ** argv)
     }
 
     while(menu == 0){
-	    printf("\n1. Print Records\n2. Add a record\n3. Send to file\n4. Delete a Record\n5. Quit\n");
+	    printf("\n1. Print Records\n2. Add a record\n3. Send to file\n4. Sort List\n5. Delete a Record\n6. Quit\n");
 	    scanf("%d", &input);
 	    //If user would like to print the patient records
 	    if(input == 1){
@@ -81,13 +80,12 @@ int main(int argc, char ** argv)
 				printf("Sorry! There was a problem with deleting the record!\n");
 			}
 		}
-
-		/*
-			Room for potential sort feature?
-		*/
-
-		//User wishes to quit program
+		//Sorts the list alphabetically
 		else if(input == 5){
+			head = sortList(head);
+		}
+		//User wishes to quit program
+		else if(input == 6){
 			printf("Closing Records.\n");
 			menu = 1;
 		}
@@ -102,8 +100,7 @@ int main(int argc, char ** argv)
 }
 
 /*Inserts information into a record*/
-void insertEnd(struct rec **head, double wNum, double hNum, double bmi, 
-	char * name, int recNum)
+void insertEnd(struct rec **head, double wNum, double hNum, double bmi, char * name, int recNum)
 {
 	struct rec *record = (struct rec *) malloc(sizeof(struct rec) * recNum);
 	struct rec *current = *head;
@@ -129,8 +126,7 @@ void insertEnd(struct rec **head, double wNum, double hNum, double bmi,
 	current->next = record;
 }
 
-void addRecord(struct rec **head, double wNum, double hNum, double bmi, 
-	char * name, int recNum)
+void addRecord(struct rec **head, double wNum, double hNum, double bmi, char * name, int recNum)
 {
 	struct rec * record = (struct rec *) realloc(record, recNum * sizeof(struct rec)); 
 	struct rec *current = *head;
@@ -209,6 +205,13 @@ void removeRecord(struct rec **head, char * name)
 			return;
 		}
 	}*/
+}
+
+struct rec * sortList(struct rec * head)
+{
+	struct rec * temp = head;
+	
+
 }
 
 /*Prints each record out in order*/
