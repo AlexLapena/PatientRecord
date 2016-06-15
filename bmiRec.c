@@ -17,7 +17,8 @@ struct rec
 void insertEnd(struct rec **head, double weight, double height, double bmi, char * name, int recNum);
 void addRecord(struct rec **head, double wNum, double hNum, double bmi, char * name, int recNum);
 void removeRecord(struct rec **head, char * name);
-struct rec * sortList(struct rec * head);
+void sortList(struct rec ** head);
+void swap(struct rec * a, struct rec * b);
 void toFile(struct rec * list);
 void printRecs(struct rec * list);
 void destroy(struct rec ** head);
@@ -69,8 +70,15 @@ int main(int argc, char ** argv)
 	    else if(input == 3){
 			toFile(head);
 	    }
-		//If user would like to delete records
+	
+		//Sorts the list alphabetically
 		else if(input == 4){
+			printf("This feature is currently in development.\n");
+			sortList(&head);
+		}
+
+		//If user would like to delete records
+		else if(input == 5){
 			if(head->next != NULL){
 				printf("Which record would you like to delete?\n");
 				scanf("%s", name);
@@ -80,10 +88,7 @@ int main(int argc, char ** argv)
 				printf("Sorry! There was a problem with deleting the record!\n");
 			}
 		}
-		//Sorts the list alphabetically
-		else if(input == 5){
-			head = sortList(head);
-		}
+
 		//User wishes to quit program
 		else if(input == 6){
 			printf("Closing Records.\n");
@@ -207,11 +212,41 @@ void removeRecord(struct rec **head, char * name)
 	}*/
 }
 
-struct rec * sortList(struct rec * head)
+/*Bubble Sorts alphabetically*/
+void sortList(struct rec **head)
 {
-	struct rec * temp = head;
+	struct rec * current = *head;
+	struct rec * last = NULL;
+	int isSwapped, i;
 	
+	if(current == NULL){
+		printf("Error: No list to print.\n");
+		return;
+	}
 
+	do {
+		isSwapped = 0;
+		last = *head;
+		printf("%s\n",current->name);
+		while (current->next != last){
+			if (current->name[0] > current->next->name[0]){
+				printf("%c %c\n", current->name[0], current->next->name[0]);
+				printf("%d %d\n", current->name[0], current->next->name[0]);
+				swap(current, current->next);
+				isSwapped = 1;
+			}
+			current = current->next;
+		}
+		last = current;
+
+	} while (isSwapped);
+}
+
+void swap(struct rec * a, struct rec * b)
+{
+	struct rec * temp = a;
+	a = b;
+	b = temp;
 }
 
 /*Prints each record out in order*/
